@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <!-- date toolbar -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/calendarToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/defaultColor">
+
+        <TextView
+            android:id="@+id/currentDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/weekDayLabelColor"
+            android:textSize="18sp"
+            tools:text="September 2018"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <!-- eventDays header -->
+    <LinearLayout
+        android:id="@+id/weekDayBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/defaultColor">
+
+        <TextView
+            android:id="@+id/mondayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_monday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor" />
+
+        <TextView
+            android:id="@+id/tuesdayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_tuesday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor"  />
+
+        <TextView
+            android:id="@+id/wednesdayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_wednesday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor" />
+
+        <TextView
+            android:id="@+id/thursdayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_thursday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor"  />
+
+        <TextView
+            android:id="@+id/fridayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_friday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor"  />
+
+        <TextView
+            android:id="@+id/saturdayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_saturday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor"  />
+
+        <TextView
+            android:id="@+id/sundayLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/material_calendar_sunday"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/weekDayLabelColor"  />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.applandeo.materialcalendarview.extensions.CalendarViewPager
+            android:id="@+id/calendarViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+</LinearLayout>
