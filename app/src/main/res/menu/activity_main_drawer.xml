@@ -3,36 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/nav_type_general"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_overview"
+            android:icon="@drawable/ic_nav_overview"
+            android:title="@string/nav_view_overview" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_agenda"
+            android:icon="@drawable/ic_nav_agenda"
+            android:title="@string/nav_view_agenda" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_nav_calendar"
+            android:title="@string/nav_view_calendar" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/ic_nav_statistics"
+            android:title="@string/nav_view_statistics" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/nav_type_user_lists"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_partners"
+            android:icon="@drawable/ic_nav_partners"
+            android:title="@string/nav_partners" />
+        <item
+            android:id="@+id/nav_fetishes"
+            android:icon="@drawable/ic_nav_fetishes"
+            android:title="@string/nav_fetishes" />
+        <item
+            android:id="@+id/nav_sex_acts"
+            android:icon="@drawable/ic_nav_sex_acts"
+            android:title="@string/nav_sex_acts" />
+        <item
+            android:id="@+id/nav_places"
+            android:icon="@drawable/ic_nav_places"
+            android:title="@string/nav_places" />
+        <item
+            android:id="@+id/nav_positions"
+            android:icon="@drawable/ic_nav_positions"
+            android:title="@string/nav_positions" />
+    </group>
+
+    <group
+        android:id="@+id/nav_type_user_states"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_remove_ads"
+            android:icon="@drawable/ic_nav_remove_ads"
+            android:title="@string/nav_view_remove_ads" />
+        <item
+            android:id="@+id/nav_contact_support"
+            android:icon="@drawable/ic_nav_contact_support"
+            android:title="@string/nav_view_contact_support" />
+        <item
+            android:id="@+id/nav_achievements"
+            android:icon="@drawable/ic_nav_achievements"
+            android:title="@string/nav_view_achievements" />
+        <item
+            android:id="@+id/nav_reminders"
+            android:icon="@drawable/ic_nav_reminders"
+            android:title="@string/nav_view_reminders" />
+        <item
+            android:id="@+id/nav_password"
+            android:icon="@drawable/ic_nav_password"
+            android:title="@string/nav_view_password" />
+
+    </group>
 
 </menu>

@@ -1,6 +1,8 @@
 package com.example.android.sudo;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,30 +18,49 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Calendar;
+
+public class CalendarActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String LOG_TAG = "MainActivity".getClass().getSimpleName();
+    private static final String LOG_TAG = "CalendarActivity".getClass().getSimpleName();
 
+    private CalendarView mCalendarView;
     private Toolbar mToolbar;
+    private List<EventDay> mEventDays;
     private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calendar);
 
+        initActionBar();
         initFab();
-        initToolbar();
         initDrawer();
+        initCalendarView();
+        initEvents();
 
-        if(savedInstanceState == null) {
-            Log.v(LOG_TAG, "onCreate: savedInstanceState == null; open the calendar activity");
-            Intent overviewIntent = new Intent(this, OverviewActivity.class);
-            startActivity(overviewIntent);
-        }
     }
 
+    private void initActionBar() {
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        try {
+            getSupportActionBar().setTitle(mCalendarView.getCalendarTitleDate());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void initFab() {
         mFab = findViewById(R.id.fab);
@@ -53,13 +74,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void initToolbar() {
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-    }
-
     private void initDrawer() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -67,6 +83,54 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initCalendarView() {
+        mCalendarView = findViewById(R.id.calendarView);
+
+        mCalendarView.setOnPreviousPageChangeListener(new OnCalendarPageChangeListener() {
+            @Override
+            public void onChange() {
+                Log.v(LOG_TAG, "initCalendarView: calendarView moved backwards");
+                getSupportActionBar().setTitle(mCalendarView.getCalendarTitleDate());
+            }
+        });
+
+        mCalendarView.setOnForwardPageChangeListener(new OnCalendarPageChangeListener() {
+            @Override
+            public void onChange() {
+                Log.v(LOG_TAG, "initCalendarView: calendarView moved forward");
+                getSupportActionBar().setTitle(mCalendarView.getCalendarTitleDate());
+            }
+        });
+    }
+
+    private void initEvents() {
+        mEventDays = new ArrayList<>();
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(Calendar.DAY_OF_MONTH, 12);
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(Calendar.DAY_OF_MONTH, 16);
+
+        Drawable draw = getResources().getDrawable(R.drawable.test_event);
+        draw.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
+        mEventDays.add(new EventDay(calendar1, draw));
+        mEventDays.add(new EventDay(calendar2, draw));
+
+        mCalendarView.setEvents(mEventDays);
+        Log.v(LOG_TAG, "onCreate: number of events added" + mEventDays.size());
+    }
+
+    private void setCalendarToday() {
+        Calendar cal = Calendar.getInstance();
+
+        try {
+            mCalendarView.setDate(cal);
+        } catch(OutOfDateRangeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -82,13 +146,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_calendar, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_calendar_today:
+                setCalendarToday();
+                Log.v(LOG_TAG, "onOptionsItemSelected: clicked the calendar today icon.");
+                return true;
+            case R.id.action_hide_events:
+                // TODO: open the hide events tab
+                Log.v(LOG_TAG, "onOptionsItemSelected: clicked the hide events tab.");
+                return true;
             case R.id.action_settings:
                 // TODO: open the settings tab or shared preference tab
                 Log.v(LOG_TAG, "onOptionsItemSelected: clicked the settings.");

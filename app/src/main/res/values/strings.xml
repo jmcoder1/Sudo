@@ -5,18 +5,36 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">Lorem Ipsum</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_settings_desc">Settings</string>
     <string name="action_settings">Settings</string>
 
     <string name="action_calendar_today">Calendar Today</string>
     <string name="action_hide_events">Hide Events</string>
 
-    
-
     <!-- Preference strings -->
     <string name="pref_theme_key" translatable="false">theme</string>
     <string name="pref_theme_label" translatable="true">Themes</string>
 
+    <!-- NavigationView drawer strings -->
+        <!-- General layer -->
+        <string name="nav_view_overview">Overview</string>
+        <string name="nav_view_agenda">Agenda</string>
+        <string name="nav_view_calendar">Calendar</string>
+        <string name="nav_view_statistics">Statistics</string>
 
+        <!-- User lists layer-->
+        <string name="nav_partners">Partners</string>
+        <string name="nav_fetishes">Fetishes</string>
+        <string name="nav_sex_acts">Sex Acts</string>
+        <string name="nav_places">Places</string>
+        <string name="nav_positions">Positions</string>
+
+        <!-- User states layer -->
+        <string name="nav_view_remove_ads">Remove Ads</string>
+        <string name="nav_view_contact_support">Contact Support</string>
+        <string name="nav_view_achievements">Achievements</string>
+        <string name="nav_view_reminders">Reminders</string>
+        <string name="nav_view_password">Password</string>
 
 
 </resources>
