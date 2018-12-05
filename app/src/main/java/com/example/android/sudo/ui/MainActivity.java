@@ -1,4 +1,4 @@
-package com.example.android.sudo;
+package com.example.android.sudo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.android.sudo.R;
+import com.example.android.sudo.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,8 +93,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                // TODO: open the settings tab or shared preference tab
-                Log.v(LOG_TAG, "onOptionsItemSelected: clicked the settings.");
+                Log.v(LOG_TAG, "onOptionsItemSelected:: opened Settings activity");
+                Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+                startActivity(startSettingsActivity);
+
                 return true;
 
         }
