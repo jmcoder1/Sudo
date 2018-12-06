@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.ProfileActivity">
 
-    <item
-        android:id="@+id/action_calendar_today"
-        android:title="@string/action_calendar_today"
-        android:icon="@drawable/ic_action_calendar_today"
-        app:showAsAction="always" />
+  <item
+      android:id="@+id/action_calendar_today"
+      android:title="@string/action_calendar_today"
+      android:icon="@drawable/ic_action_calendar_today"
+      app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_hide_events"
-        android:title="@string/action_hide_events"
-        app:showAsAction="never" />
+  <item
+      android:id="@+id/action_hide_events"
+      android:title="@string/action_hide_events"
+      app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+  <item
+      android:id="@+id/action_settings"
+      android:title="@string/action_settings"
+      app:showAsAction="never" />
 
 
 </menu>

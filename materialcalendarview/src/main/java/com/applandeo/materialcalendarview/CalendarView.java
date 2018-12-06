@@ -2,16 +2,17 @@ package com.applandeo.materialcalendarview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
 import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
-import com.applandeo.materialcalendarview.exceptions.ErrorsMessages;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.extensions.CalendarViewPager;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
@@ -189,6 +190,21 @@ public class CalendarView extends LinearLayout {
 
         setUpCalendarPosition(Calendar.getInstance());
     }
+
+    public void hideCalendarEvents() {
+        List<ImageView> icons = mCalendarProperties.getEventDayIcons();
+        for(int i = 0; i < icons.size(); i++) {
+            ImageView icon = icons.get(i);
+            icon.setVisibility(INVISIBLE);
+        }
+    }
+
+    public void showCalendarEvents() {
+        List<ImageView> icons = mCalendarProperties.getEventDayIcons();
+        for(int i = 0; i < icons.size(); i++) {
+            ImageView icon = icons.get(i);
+            icon.setVisibility(VISIBLE);
+        }    }
 
     private void setUpCalendarPosition(Calendar calendar) {
         DateUtils.setMidnight(calendar);

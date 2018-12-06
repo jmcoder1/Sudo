@@ -38,6 +38,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     // Day TextView which previously had special styling - such as the current day
     private List<TextView> mEventDayTextView = new ArrayList<>();
+    private List<ImageView> mEventDayIcon = new ArrayList<>();
     private View mLastClickedDayParentView;
     private TextView mLastClickedDayTextView;
 
@@ -69,6 +70,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         // Loading an image of the event
         if (dayIcon != null) {
             loadIcon(dayIcon, day);
+            mCalendarProperties.addEventDayIcon(dayIcon);
         }
 
         setLabelColors(dayLabel, dayIcon, dayParent, day);

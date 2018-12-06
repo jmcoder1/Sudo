@@ -2,6 +2,7 @@ package com.applandeo.materialcalendarview.utils;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.widget.ImageView;
 
 import com.annimon.stream.Stream;
 import com.applandeo.materialcalendarview.CalendarView;
@@ -52,11 +53,18 @@ public class CalendarProperties {
     private List<Calendar> mDisabledDays = new ArrayList<>();
     private List<SelectedDay> mSelectedDays = new ArrayList<>();
     private List<Calendar> mEventCalendarDays = new ArrayList<>();
+    private List<ImageView> mEventDayIcons = new ArrayList<>();
 
     private Context mContext;
 
     public CalendarProperties(Context context) {
         mContext = context;
+    }
+
+    public List<ImageView> getEventDayIcons() { return mEventDayIcons;}
+
+    public void addEventDayIcon(ImageView icon) {
+        mEventDayIcons.add(icon);
     }
 
     public int getCalendarType() {
