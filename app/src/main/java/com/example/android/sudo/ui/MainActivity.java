@@ -1,7 +1,9 @@
 package com.example.android.sudo.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,16 +21,20 @@ import android.view.MenuItem;
 import com.example.android.sudo.R;
 import com.example.android.sudo.SettingsActivity;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String LOG_TAG = "MainActivity".getClass().getSimpleName();
 
     private Toolbar mToolbar;
     private FloatingActionButton mFab;
+    private NavigationView mNavigationView;
+    private View mHeaderView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUpSharedPreference();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -43,6 +49,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void setUpSharedPreference() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loadThemeFromPreferences(sharedPreferences);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
 
     private void initFab() {
         mFab = findViewById(R.id.fab);
@@ -68,8 +79,94 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+        mHeaderView = mNavigationView.getHeaderView(0);
+    }
+
+    private void loadThemeFromPreferences(SharedPreferences sharedPreferences) {
+        String sharedPreferenceTheme = sharedPreferences.getString(getString(R.string.pref_theme_key),
+                getString(R.string.pref_show_red_theme_label));
+
+        Log.v(LOG_TAG, "loadThemeFromPreferences: load theme from preferences.");
+
+        if(sharedPreferenceTheme.equals(getString(R.string.pref_show_red_theme_key))) {
+            setTheme(R.style.AppThemeRed);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: RED themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_blue_theme_key))) {
+            setTheme(R.style.AppThemeBlue);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryBlue);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: BLUE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_green_theme_key))) {
+            setTheme(R.style.AppThemeGreen);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryGreen);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: GREEN themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_purple_theme_key))) {
+            setTheme(R.style.AppThemePurple);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryPurple);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: PURPLE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_pink_theme_key))) {
+            setTheme(R.style.AppThemePink);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryPink);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: PINK themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_orange_theme_key))) {
+            setTheme(R.style.AppThemeOrange);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryOrange);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: ORANGE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_mint_theme_key))) {
+            setTheme(R.style.AppThemeMint);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryMint);
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: MINT themes from Shared Preferences.");
+        }
+    }
+
+    private void loadNightModeFromPreferences(SharedPreferences sharedPreferences) {
+        /*String sharedPreferenceTheme = sharedPreferences.getString(getString(R.string.pref_theme_key),
+                getString(R.string.pref_show_default_theme_label));
+
+        if(sharedPreferenceTheme.equals(getString(R.string.pref_show_default_theme_key))) {
+        } else {
+
+        }*/
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.pref_theme_key))) {
+            loadThemeFromPreferences(sharedPreferences);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -135,5 +232,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpSharedPreference();
     }
 }

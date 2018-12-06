@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_theme_labels">
+        <item>@string/pref_show_red_theme_label</item>
+        <item>@string/pref_show_blue_theme_label</item>
+        <item>@string/pref_show_green_theme_label</item>
+        <item>@string/pref_show_purple_theme_label</item>
+        <item>@string/pref_show_pink_theme_label</item>
+        <item>@string/pref_show_orange_theme_label</item>
+        <item>@string/pref_show_mint_theme_label</item>
+    </array>
+
+    <array name="pref_theme_values">
+        <item>@string/pref_show_red_theme_key</item>
+        <item>@string/pref_show_blue_theme_key</item>
+        <item>@string/pref_show_green_theme_key</item>
+        <item>@string/pref_show_purple_theme_key</item>
+        <item>@string/pref_show_pink_theme_key</item>
+        <item>@string/pref_show_orange_theme_key</item>
+        <item>@string/pref_show_mint_theme_key</item>
+
+    </array>
+
+</resources>

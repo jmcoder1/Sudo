@@ -12,9 +12,35 @@
     <string name="action_hide_events">Hide Events</string>
 
     <!-- Preference strings -->
+    <string name="pref_title_theme">Theme</string>
     <string name="pref_theme_key" translatable="false">theme</string>
-    <string name="pref_theme_label" translatable="true">Themes</string>
+    <string name="pref_theme_label" translatable="true">Theme</string>
 
+    <!-- Labels for the colour theme ListPreferences -->
+    <string name="pref_show_red_theme_label" translatable="true">Red</string>
+    <string name="pref_show_blue_theme_label" translatable="true">Blue</string>
+    <string name="pref_show_green_theme_label" translatable="true">Green</string>
+    <string name="pref_show_purple_theme_label" translatable="true">Purple</string>
+    <string name="pref_show_pink_theme_label" translatable="true">Pink</string>
+    <string name="pref_show_orange_theme_label" translatable="true">Orange</string>
+    <string name="pref_show_mint_theme_label" translatable="true">Mint</string>
+
+    <!-- Keys name for storing colour themes in SharedPreferences -->
+    <string name="pref_show_red_theme_key" translatable="false">show_red_theme</string>
+    <string name="pref_show_blue_theme_key" translatable="false">show_blue_theme</string>
+    <string name="pref_show_green_theme_key" translatable="false">show_green_theme</string>
+    <string name="pref_show_purple_theme_key" translatable="false">show_purple_theme</string>
+    <string name="pref_show_pink_theme_key" translatable="false">show_pink_theme</string>
+    <string name="pref_show_orange_theme_key" translatable="false">show_orange_theme</string>
+    <string name="pref_show_mint_theme_key" translatable="false">show_mint_theme</string>
+
+
+    <string name="pref_show_night_mode_key" translatable="false">show_night_mode</string>
+    <string name="pref_show_night_mode_label" translatable="true">Show Night Mode</string>
+
+
+    <string name="pref_show_night_mode_true">Night Mode On</string>
+    <string name="pref_show_night_mode_false">Night Mode Off</string>
     <!-- NavigationView drawer strings -->
         <!-- General layer -->
         <string name="nav_view_overview">Overview</string>

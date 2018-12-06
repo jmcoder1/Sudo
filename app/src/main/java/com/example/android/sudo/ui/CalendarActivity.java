@@ -1,6 +1,10 @@
 package com.example.android.sudo.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +22,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -29,18 +36,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
 
-public class CalendarActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class CalendarActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String LOG_TAG = "CalendarActivity".getClass().getSimpleName();
 
     private CalendarView mCalendarView;
+    private NavigationView mNavigationView;
+    private View mHeaderView;
     private Toolbar mToolbar;
     private List<EventDay> mEventDays;
     private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUpSharedPreference();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
@@ -50,6 +61,12 @@ public class CalendarActivity extends AppCompatActivity
         initCalendarView();
         initEvents();
 
+    }
+
+    private void setUpSharedPreference() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loadThemeFromPreferences(sharedPreferences);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     private void initActionBar() {
@@ -83,8 +100,9 @@ public class CalendarActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+        mHeaderView = mNavigationView.getHeaderView(0);
     }
 
     private void initCalendarView() {
@@ -132,6 +150,144 @@ public class CalendarActivity extends AppCompatActivity
             mCalendarView.setDate(cal);
         } catch(OutOfDateRangeException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadThemeFromPreferences(SharedPreferences sharedPreferences) {
+        String sharedPreferenceTheme = sharedPreferences.getString(getString(R.string.pref_theme_key),
+                getString(R.string.pref_show_red_theme_label));
+
+        Log.v(LOG_TAG, "loadThemeFromPreferences: load theme from preferences.");
+
+        if(sharedPreferenceTheme.equals(getString(R.string.pref_show_red_theme_key))) {
+            setTheme(R.style.AppThemeRed);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimary));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimary));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimary));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorAccent));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: RED themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_blue_theme_key))) {
+            setTheme(R.style.AppThemeBlue);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryBlue);
+            }
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryBlue));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryBlue));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryBlue));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorBlueAccent));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: BLUE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_green_theme_key))) {
+            setTheme(R.style.AppThemeGreen);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryGreen);
+            }
+
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryGreen));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryGreen));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryGreen));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorGreenAccent));
+            }
+
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: GREEN themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_purple_theme_key))) {
+            setTheme(R.style.AppThemePurple);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryPurple);
+            }
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryPurple));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryPurple));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryPurple));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorPurpleAccent));
+            }
+
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: PURPLE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_pink_theme_key))) {
+            setTheme(R.style.AppThemePink);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryPink);
+            }
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryPink));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryPink));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryPink));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorPinkAccent));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: PINK themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_orange_theme_key))) {
+            setTheme(R.style.AppThemeOrange);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryOrange);
+            }
+
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryOrange));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryOrange));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryOrange));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorOrangeAccent));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: ORANGE themes from Shared Preferences.");
+        } else if(sharedPreferenceTheme.equals(getString(R.string.pref_show_mint_theme_key))) {
+            setTheme(R.style.AppThemeMint);
+
+            if(mHeaderView != null) {
+                mHeaderView.setBackgroundResource(R.color.colorPrimaryMint);
+            }
+
+            if(mCalendarView != null) {
+                mCalendarView.setSelectionColor(getResources().getColor(R.color.colorPrimaryMint));
+                mCalendarView.setEventDayColor(getResources().getColor(R.color.colorPrimaryMint));
+                mCalendarView.setWeekDayBarColor(getResources().getColor(R.color.colorPrimaryMint));
+                mCalendarView.setTodayColor(getResources().getColor(R.color.colorMintAccent));
+            }
+
+            Log.v(LOG_TAG, "loadThemeFromPreferences: MINT themes from Shared Preferences.");
+        }
+    }
+
+    private void loadNightModeFromPreferences(SharedPreferences sharedPreferences) {
+        /*String sharedPreferenceTheme = sharedPreferences.getString(getString(R.string.pref_theme_key),
+                getString(R.string.pref_show_default_theme_label));
+
+        if(sharedPreferenceTheme.equals(getString(R.string.pref_show_default_theme_key))) {
+        } else {
+
+        }*/
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.pref_theme_key))) {
+            loadThemeFromPreferences(sharedPreferences);
+            Intent intent = new Intent(this, CalendarActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -206,5 +362,19 @@ public class CalendarActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpSharedPreference();
+
     }
 }

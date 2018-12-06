@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <PreferenceCategory android:title="@string/pref_title_theme">
+
+        <ListPreference
+            android:defaultValue="pref_show_default_theme_label"
+            android:icon="@drawable/ic_shared_preferences_themes"
+            android:entries="@array/pref_theme_labels"
+            android:entryValues="@array/pref_theme_values"
+            android:key="@string/pref_theme_key"
+            android:title="@string/pref_theme_label" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_night_mode_default"
+            android:icon="@drawable/ic_night_mode"
+            android:key="@string/pref_show_night_mode_key"
+            android:summaryOff="@string/pref_show_night_mode_false"
+            android:summaryOn="@string/pref_show_night_mode_true"
+            android:title="@string/pref_show_night_mode_label" />
+
+    </PreferenceCategory>
 
 
 </PreferenceScreen>
