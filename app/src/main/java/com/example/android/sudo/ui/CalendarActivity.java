@@ -2,6 +2,7 @@ package com.example.android.sudo.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -47,9 +48,9 @@ public class CalendarActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setUpSharedPreference();
+        setContentView(R.layout.activity_calendar);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
 
         initActionBar();
         initFab();

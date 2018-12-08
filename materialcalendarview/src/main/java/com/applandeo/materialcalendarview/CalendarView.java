@@ -57,7 +57,6 @@ public class CalendarView extends LinearLayout {
     private Context mContext;
     private int mCurrentPage;
     private String mCalendarTitleDate;
-    private TextView mCurrentMonthLabel;
 
     private CalendarPageAdapter mCalendarPageAdapter;
     private CalendarViewPager mViewPager;
@@ -83,9 +82,12 @@ public class CalendarView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.calendar_view, this);
 
-        initUiElements();
+        mViewPager = (CalendarViewPager) findViewById(R.id.calendarViewPager);
+
         initAttributes();
         initCalendar();
+
+
     }
 
     private void initControl(Context context, AttributeSet attrs) {
@@ -95,7 +97,8 @@ public class CalendarView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.calendar_view, this);
 
-        initUiElements();
+        mViewPager = (CalendarViewPager) findViewById(R.id.calendarViewPager);
+
         setAttributes(attrs);
     }
 
@@ -135,9 +138,6 @@ public class CalendarView extends LinearLayout {
         int eventDayColor = typedArray.getColor(R.styleable.CalendarView_eventDayColor, 0);
         mCalendarProperties.setEventDayColor(eventDayColor);
 
-        int toolbarColor = typedArray.getColor(R.styleable.CalendarView_toolbarColor, 0);
-        mCalendarProperties.setToolbarColor(toolbarColor);
-
         int disabledDaysLabelsColor = typedArray.getColor(R.styleable.CalendarView_disabledDaysLabelsColor, 0);
         mCalendarProperties.setDisabledDaysLabelsColor(disabledDaysLabelsColor);
 
@@ -164,8 +164,6 @@ public class CalendarView extends LinearLayout {
 
         AppearanceUtils.setTodaySelectionColor(getResources(), mCalendarProperties.getTodayColor());
 
-        AppearanceUtils.setToolbarColor(getRootView(), mCalendarProperties.getToolbarColor());
-
         // Sets layout for date picker or normal calendar
         setCalendarRowLayout();
     }
@@ -178,14 +176,7 @@ public class CalendarView extends LinearLayout {
         }
     }
 
-    private void initUiElements() {
-        mCurrentMonthLabel = (TextView) findViewById(R.id.currentDateLabel);
-        mViewPager = (CalendarViewPager) findViewById(R.id.calendarViewPager);
-    }
-
     private void initCalendar() {
-
-
         mCalendarPageAdapter = new CalendarPageAdapter(mContext, mCalendarProperties);
 
         mViewPager.setAdapter(mCalendarPageAdapter);
@@ -272,7 +263,6 @@ public class CalendarView extends LinearLayout {
 
     private void setHeaderName(Calendar calendar, int position) {
         mCalendarTitleDate = DateUtils.getMonthAndYearDate(mContext, calendar);
-        mCurrentMonthLabel.setText(mCalendarTitleDate);
         callOnPageChangeListeners(position);
     }
 
@@ -316,9 +306,8 @@ public class CalendarView extends LinearLayout {
         }
 
         setUpCalendarPosition(date);
-
         mCalendarTitleDate = DateUtils.getMonthAndYearDate(mContext, date);
-        mCurrentMonthLabel.setText(mCalendarTitleDate);
+
         mCalendarPageAdapter.notifyDataSetChanged();
     }
 
@@ -421,15 +410,6 @@ public class CalendarView extends LinearLayout {
 
     public int getEventDayColor() {
         return mCalendarProperties.getEventDayColor();
-    }
-
-    public void setToolbarColor(int color) {
-        mCalendarProperties.setToolbarColor(color);
-        AppearanceUtils.setToolbarColor(getRootView(), mCalendarProperties.getToolbarColor());
-    }
-
-    public int getToolbarColor() {
-        return mCalendarProperties.getToolbarColor();
     }
 
     public void setWeekDayBarColor(int color) {

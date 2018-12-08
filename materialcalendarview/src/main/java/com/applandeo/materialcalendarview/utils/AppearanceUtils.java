@@ -63,15 +63,6 @@ public final class AppearanceUtils {
 
     }
 
-
-    public static void setToolbarColor(View view, int color) {
-        if(color == 0) {
-            return;
-        }
-
-        view.findViewById(R.id.calendarToolbar).setBackgroundColor(color);
-    }
-
     public static void setWeekDayBarColor(View view, int color) {
         if (color == 0) {
             return;

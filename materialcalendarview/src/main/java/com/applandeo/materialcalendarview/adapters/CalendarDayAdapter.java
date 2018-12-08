@@ -36,7 +36,6 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
     private Calendar mToday = DateUtils.getCalendar();
     private int mPageMonth;
 
-    // Day TextView which previously had special styling - such as the current day
     private List<TextView> mEventDayTextView = new ArrayList<>();
     private View mLastClickedDayParentView;
     private TextView mLastClickedDayTextView;
@@ -58,8 +57,8 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         }
 
         View dayParent = view.findViewById(R.id.dayParent);
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
-        ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
+        ImageView dayIcon = view.findViewById(R.id.dayIcon);
 
         setDayClickedListener(dayParent, dayLabel, dayIcon);
         setSelectorColors();

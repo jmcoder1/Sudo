@@ -5,10 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by Mateusz Kornakiewicz on 21.11.2017.
- */
-
 public class CalendarViewPager extends ViewPager {
 
     public CalendarViewPager(Context context) {

@@ -3,7 +3,6 @@
     <declare-styleable name="CalendarView">
         <attr name="todayColor" format="color" />
         <attr name="selectionColor" format="color" />
-        <attr name="toolbarColor" format="color"/>
         <attr name="weekDayBarColor" format="color" />
         <attr name="weekDayLabelColor" format="color" />
         <attr name="eventDayColor" format="color" />
