@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.annimon.stream.Stream;
 import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
+import com.applandeo.materialcalendarview.exceptions.ErrorsMessages;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.extensions.CalendarViewPager;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
@@ -183,6 +184,8 @@ public class CalendarView extends LinearLayout {
     }
 
     private void initCalendar() {
+
+
         mCalendarPageAdapter = new CalendarPageAdapter(mContext, mCalendarProperties);
 
         mViewPager.setAdapter(mCalendarPageAdapter);

@@ -349,6 +349,7 @@ public class CalendarActivity extends AppCompatActivity implements
                 Log.v(LOG_TAG, "onNavigationItemSelected: navigation overview item selected");
                 Intent overviewIntent = new Intent(this, OverviewActivity.class);
                 startActivity(overviewIntent);
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
                 break;
 
             case R.id.nav_agenda:
@@ -358,6 +359,7 @@ public class CalendarActivity extends AppCompatActivity implements
                 Log.v(LOG_TAG, "onNavigationItemSelected: navigation calendar item selected");
                 Intent calendarIntent = new Intent(this, CalendarActivity.class);
                 startActivity(calendarIntent);
+                overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
                 break;
 
             case R.id.nav_statistics:

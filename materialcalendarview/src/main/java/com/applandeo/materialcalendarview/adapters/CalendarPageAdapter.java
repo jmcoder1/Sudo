@@ -133,7 +133,7 @@ public class CalendarPageAdapter extends PagerAdapter {
         // Subtract a number of beginning days, it will let to load a part of a previous month
         calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
 
-        /*
+        /**
         Get all days of one page (42 is a number of all possible cells in one page
         (a part of previous month, current month and a part of next month))
          */

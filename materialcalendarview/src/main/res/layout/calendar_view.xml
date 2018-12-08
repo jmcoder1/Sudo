@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/calendarToolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="90dp"
         android:background="@color/defaultColor">
 
         <TextView
@@ -113,15 +113,11 @@
             android:textColor="@color/weekDayLabelColor"  />
     </LinearLayout>
 
-    <ScrollView
+    <com.applandeo.materialcalendarview.extensions.CalendarViewPager
+        android:id="@+id/calendarViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <com.applandeo.materialcalendarview.extensions.CalendarViewPager
-            android:id="@+id/calendarViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-    </ScrollView>
 
 </LinearLayout>

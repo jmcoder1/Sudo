@@ -22,6 +22,8 @@ public class CalendarViewPager extends ViewPager {
     //This method is needed to get wrap_content height for ViewPager
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+
         int height = 0;
 
         for (int i = 0; i < getChildCount(); i++) {
